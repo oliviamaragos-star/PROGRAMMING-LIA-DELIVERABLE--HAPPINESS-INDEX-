@@ -15,7 +15,9 @@
 cols = (2, 6, 7, 8, 9, 10, 11)
 import numpy as np
 data = np.loadtxt("world-happiness-report-2021.csv", delimiter=",", skiprows=1, usecols = cols )
-
+# each column seperately
+ladder, gdp, support, life, freedom, generosity, corruption = data.T
+print("Ladder sample:", ladder[:5])
 
 
 
