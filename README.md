@@ -1,2 +1,2 @@
 # PROGRAMMING LIA DELIVERABLE--HAPPINESS INDEX 
-Repository for the Programming in Science class where Python is used to analyze datasets, particularly the World Happiness Index and it's influence on countries. 
+Repository for the Programming in Science class, where Python is used to analyze datasets, particularly the World Happiness Index and its influence on countries. By examining this dataset, we can explore patterns across the various countries featured and gain a deeper understanding of how factors such as wealth and social trust influence a population’s well-being.
