@@ -11,8 +11,10 @@
 # ================================================================
 # Loading datset with Numpy
 # ---------------------------------------------------------------
+# numeric columns: Ladder, GDP, Support, LifeExp, Freedom, Generosity, Corruption
+cols = (2, 6, 7, 8, 9, 10, 11)
 import numpy as np
-data = np.loadtxt("world-happiness-report-2021.csv", delimiter=",", skiprows=1)
+data = np.loadtxt("world-happiness-report-2021.csv", delimiter=",", skiprows=1, usecols = cols )
 
 
 
