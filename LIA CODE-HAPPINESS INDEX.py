@@ -90,8 +90,11 @@ region = np.genfromtxt("world-happiness-report-2021.csv", delimiter=",", skip_he
 # 1) Multi-series LINE plot with different colors/styles + grid
 # ----------------------------------------------------------
 # THOUGHT PROCESS 
-    #Sort countries by Ladder score (descending) and plot
-    #Ladder vs rank alongside Freedom vs rank to compare trends.
+    # Sort countries by Ladder score (descending) and plot
+    # Ladder vs rank alongside Freedom vs rank to compare trends.
+    # This plot helps visualize how a country's reported happiness
+    # (ladder) tends to move with its freedom score when countries are ordered
+    # by happiness ranking.
 # ----------------------------------------------------------
 
 idx = np.argsort(ladder)[::-1]  # indices that sort ladder high→low
@@ -110,14 +113,113 @@ plt.title("Happiness vs Freedom (countries ranked by Ladder score)")
 plt.xlabel("Country rank (by Ladder score)")
 plt.ylabel("Score (unitless)")
 
-# Grid ON (per spec d)
 plt.grid(True)
 
 # Legend to distinguish the two series
 plt.legend()
 
-# This plot helps visualize how a country's reported happiness
-# (ladder) tends to move with its freedom score when countries are ordered
-# by happiness ranking.
 
+# ----------------------------------------------------------
+# 2) Two SUBPLOTS side-by-side in the same figure (counts as 1)
+# ----------------------------------------------------------
+# THOUGHT PROCESS 
+    # Show two related scatter plots side-by-side for quick comparison.
+    # These two side-by-side plots let us visually compare how happiness
+    # changes with GDP vs with social support. Both tend to show positive patterns
+# ----------------------------------------------------------
 
+plt.figure(figsize=(12, 5))
+
+# Left subplot: Ladder vs Logged GDP
+plt.subplot(1, 2, 1)                 # 1 row, 2 columns, left subplot
+plt.scatter(gdp, ladder, alpha=0.7)  # scatter shows relationship
+plt.title("Ladder vs Logged GDP per capita")
+plt.xlabel("Logged GDP per capita")
+plt.ylabel("Ladder (happiness)")
+plt.grid(True)  # grid can help see spread
+
+# Right subplot: Ladder vs Social support
+plt.subplot(1, 2, 2)                 # 1 row, 2 columns, right subplot
+plt.scatter(support, ladder, alpha=0.7)
+plt.title("Ladder vs Social Support")
+plt.xlabel("Social support (0–1)")
+plt.ylabel("Ladder (happiness)")
+plt.grid(True)
+
+# ----------------------------------------------------------
+# 3) SCATTER plot: Ladder vs Freedom (explicit separate figure)
+# ----------------------------------------------------------
+# THOUGHT PROCESS 
+    # This scatter tests whether greater personal freedom aligns with higher
+    # reported happiness. The cloud should trend upward if there’s a positive relation.
+# ----------------------------------------------------------
+
+plt.figure(figsize=(7, 5))
+plt.scatter(freedom, ladder, alpha=0.7)
+plt.title("Ladder vs Freedom to make life choices")
+plt.xlabel("Freedom (0–1)")
+plt.ylabel("Ladder (happiness)")
+plt.grid(True)
+
+# ----------------------------------------------------------
+# 4) BAR plot: Top 10 happiest countries (by Ladder score)
+# ----------------------------------------------------------
+# THOUGHT PROCESS 
+    # Sort by ladder and take the top 10 for a readable bar chart.
+# ----------------------------------------------------------
+
+top_n = 10
+top_idx = np.argsort(ladder)[-top_n:][::-1]  # indices for top N, in descending order
+top_countries = country[top_idx]
+top_ladder    = ladder[top_idx]
+
+plt.figure(figsize=(12, 6))
+plt.bar(top_countries, top_ladder)
+plt.title(f"Top {top_n} Countries by Happiness (Ladder score)")
+plt.xlabel("Country")
+plt.ylabel("Ladder (happiness)")
+plt.xticks(rotation=45, ha="right")  # rotate names for readability
+plt.tight_layout()
+
+# ----------------------------------------------------------
+# 5) HISTOGRAM: Distribution of Ladder scores
+# ----------------------------------------------------------
+plt.figure(figsize=(8, 5))
+plt.hist(ladder, bins=12)  # choose a reasonable number of bins
+plt.title("Distribution of Happiness (Ladder scores)")
+plt.xlabel("Ladder score")
+plt.ylabel("Number of countries")
+plt.grid(True)
+
+# ----------------------------------------------------------
+# 6) PIE chart: Share of countries by Region
+# ----------------------------------------------------------
+# THOUGHT PROCESS 
+    # Count countries per region; if there are many, group the smaller ones
+    # The pie chart gives a quick sense of the dataset’s regional composition.
+# ----------------------------------------------------------
+
+# Compute counts per region
+unique_regions, counts = np.unique(region, return_counts=True)
+
+# Sort regions by count descending
+order = np.argsort(counts)[::-1]
+unique_regions = unique_regions[order]
+counts = counts[order]
+
+# If too many slices, keep top 6 and group the rest as "Other"
+max_slices = 6
+if len(counts) > max_slices:
+    top_regions = unique_regions[:max_slices - 1]
+    top_counts  = counts[:max_slices - 1]
+    other_count = counts[max_slices - 1:].sum()
+    labels = list(top_regions) + ["Other"]
+    sizes  = list(top_counts)  + [other_count]
+else:
+    labels = list(unique_regions)
+    sizes  = list(counts)
+
+plt.figure(figsize=(7, 7))
+plt.pie(sizes, labels=labels, autopct="%1.1f%%", startangle=90)
+plt.title("Share of Countries by Region")
+plt.tight_layout()
