@@ -50,7 +50,11 @@ filtered_freedom = []    # will store corresponding freedom values
 # range(len(sequence)) = 
     #it first returns the length of the 
     #list and then creates a sequence starting from zero
-#len() gives the number of elements (rows) in an array or list.
+# len() gives the number of elements (rows) in an array or list.
+# We chose the condition "freedom > 0.5" because the freedom scores in this dataset
+# range from 0 to 1. A value above 0.5 represents countries where people report
+# relatively high personal freedom. This makes the filter easy to understand and
+# meaningful for comparing with the Ladder (happiness) scores.
 # ---------------------------------------------------------------
 
 
