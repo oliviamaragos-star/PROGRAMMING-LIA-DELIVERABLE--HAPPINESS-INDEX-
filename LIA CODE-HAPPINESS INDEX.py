@@ -12,6 +12,9 @@
 # Loading datset with Numpy
 # ---------------------------------------------------------------
 import numpy as np
-data = np.loadtxt("world-happiness-report-2021", delimiter=",")
+data = np.loadtxt("world-happiness-report-2021.csv", delimiter=",", skiprows=1)
+
+
+
 
 
