@@ -76,6 +76,11 @@ print("After filtering (freedom > 0.5):", len(filtered_freedom))
 # ================================================================
 # Part 4: Plotting your data
 # ---------------------------------------------------------------
+# THOUGHT PROCESS 
+    # np.genfromtxt() → similar to loadtxt, but allows text (string) data.
+    # dtype=str → means "store this column as text".
+    # usecols=(0,) → loads only the first column (the country names)
+# ---------------------------------------------------------------
 
 import numpy as np   
 import matplotlib
@@ -95,6 +100,7 @@ region = np.genfromtxt("world-happiness-report-2021.csv", delimiter=",", skip_he
     # This plot helps visualize how a country's reported happiness
     # (ladder) tends to move with its freedom score when countries are ordered
     # by happiness ranking.
+    # plt.grid(True) => Adds horizontal and vertical reference lines to make the plot easier to read.
 # ----------------------------------------------------------
 
 idx = np.argsort(ladder)[::-1]  # indices that sort ladder high→low
@@ -152,6 +158,7 @@ plt.grid(True)
 # THOUGHT PROCESS 
     # This scatter tests whether greater personal freedom aligns with higher
     # reported happiness. The cloud should trend upward if there’s a positive relation.
+    # alpha=0.7 → adds transparency so overlapping dots are visible.
 # ----------------------------------------------------------
 
 plt.figure(figsize=(7, 5))
@@ -197,6 +204,8 @@ plt.grid(True)
 # THOUGHT PROCESS 
     # Count countries per region; if there are many, group the smaller ones
     # The pie chart gives a quick sense of the dataset’s regional composition.
+    # autopct="%1.1f%%" → automatically prints percentages on slices.
+    # startangle=90 → rotates the chart so the first slice starts at the top.
 # ----------------------------------------------------------
 
 # Compute counts per region
