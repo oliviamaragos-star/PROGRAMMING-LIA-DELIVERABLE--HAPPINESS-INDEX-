@@ -1,7 +1,7 @@
 # ================================================================
 # File: LIA CODE-HAPPINESS INDEX.py
 # Author: OLIVIA MARAGOS and VICTORIA MILIOTO 
-# Course: Python Programming / Lab 05
+# Course: Python Programming 
 # Date: October 2025
 #
 # Description:
