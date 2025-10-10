@@ -57,8 +57,15 @@ filtered_freedom = []    # will store corresponding freedom values
 # meaningful for comparing with the Ladder (happiness) scores.
 # ---------------------------------------------------------------
 
+OLIVIA IF YOU PUT IN THE NEXT PART -> LINES 61, 74 make sure to add this as a comment: We chose the condition "freedom > 0.5" because the freedom scores in this dataset
+# range from 0 to 1. A value above 0.5 represents countries where people report
+# relatively high personal freedom. This makes the filter easy to understand and
+# meaningful for comparing with the Ladder (happiness) scores.
+.
+.
+.
 
-# range(len(freedom)) creates a sequence of indices from 0 to number of rows - 1.
+# range(len(freedom)) creates a sequence of indices from 0 to number of rows - 1. 
 
 for i in range(len(freedom)):
 
